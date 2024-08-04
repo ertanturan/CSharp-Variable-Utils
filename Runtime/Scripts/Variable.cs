@@ -40,6 +40,11 @@ namespace VariableUtils
 		{
 			_value = initialValue;
 		}
+
+		public Variable<T> Clone()
+		{
+			return new Variable<T>(Value);
+		}
 	}
 
 	public class FloatVariable : Variable<float>
