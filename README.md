@@ -31,3 +31,15 @@ class Program
         intVariable.Value = 20;
     }
 }
+```
+### Serialization
+```csharp
+var json = intVariable.Serialize();
+var deserializedVariable = new IntVariable().Deserialize(json);
+```
+## Available Variable Types
+Primitive Types: IntVariable, FloatVariable, StringVariable, etc.
+Complex Types: Vector2Variable, ColorVariable, etc.
+Collection Types: ListVariable<T>, DictionaryVariable<TKey, TValue>, etc.
+# Dependencies
+Newtonsoft.Json: For JSON operations.
