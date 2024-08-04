@@ -28,13 +28,14 @@ namespace VariableUtils
 			{
 				if (!EqualityComparer<T>.Default.Equals(_value, value))
 				{
+					_value = value;
 					_eventArgs.Value = _value;
 					OnValueChanged?.Invoke(this, _eventArgs);
 				}
 			}
 		}
 
-		private readonly T _value;
+		private T _value;
 
 		protected Variable(T initialValue = default(T))
 		{
@@ -44,6 +45,11 @@ namespace VariableUtils
 		public Variable<T> Clone()
 		{
 			return new Variable<T>(Value);
+		}
+
+		public void Reset()
+		{
+			Value = default(T);
 		}
 	}
 
