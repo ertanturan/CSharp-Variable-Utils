@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace VariableUtils
@@ -16,6 +17,8 @@ namespace VariableUtils
 		private readonly VariableChangeEventArgs<T> _eventArgs = new();
 		private readonly object _lock = new();
 		private readonly IEqualityComparer<T> _comparer;
+
+		private readonly Formatting _jsonFormatting;
 
 		public string VariableName
 		{
@@ -49,30 +52,49 @@ namespace VariableUtils
 
 		private T _value;
 
-		protected Variable(T initialValue = default(T), IEqualityComparer<T> comparer = null)
+		public Variable(T initialValue)
 		{
 			_value = initialValue;
+		}
+
+		public Variable(T initialValue = default(T), Formatting jsonFormatting = Formatting.None) : this(initialValue)
+		{
+			_jsonFormatting = jsonFormatting;
+		}
+
+		public Variable(T initialValue = default(T), Formatting jsonFormatting = Formatting.None,
+		                IEqualityComparer<T> comparer = null) : this(initialValue, jsonFormatting)
+		{
 			_comparer = comparer ?? EqualityComparer<T>.Default;
 		}
 
-		public Variable<T> Clone()
+		public virtual Variable<T> Clone()
 		{
 			return new Variable<T>(Value);
 		}
 
-		public void Reset()
+		public virtual void Reset()
 		{
 			Value = default(T);
 		}
 
-		public string Serialize()
+		/// <summary>
+		///     Json serialization. Make sure all fields are serializable
+		/// </summary>
+		/// <returns>Json</returns>
+		public virtual string Serialize()
 		{
-			return JsonUtility.ToJson(this);
+			return JsonConvert.SerializeObject(this, _jsonFormatting);
 		}
 
-		public Variable<T> Deserialize(string jsonString)
+		/// <summary>
+		///     Json de-serialization. Make sure all fields are serializable
+		/// </summary>
+		/// <param name="jsonString"></param>
+		/// <returns>De-serialized type value</returns>
+		public virtual Variable<T> Deserialize(string jsonString)
 		{
-			return JsonUtility.FromJson<Variable<T>>(jsonString);
+			return JsonConvert.DeserializeObject<Variable<T>>(jsonString);
 		}
 	}
 
@@ -165,8 +187,6 @@ namespace VariableUtils
 	{
 	}
 
-	using System;
-
 	public class ByteVariable : Variable<byte>
 	{
 	}
@@ -200,14 +220,6 @@ namespace VariableUtils
 	}
 
 	public class ObjectVariable : Variable<object>
-	{
-	}
-
-	public class UIntPtrVariable : Variable<UIntPtr>
-	{
-	}
-
-	public class IntPtrVariable : Variable<IntPtr>
 	{
 	}
 }
