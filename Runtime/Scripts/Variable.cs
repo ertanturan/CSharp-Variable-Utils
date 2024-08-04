@@ -15,6 +15,7 @@ namespace VariableUtils
 		public event EventHandler<VariableChangeEventArgs<T>> OnValueChanged;
 		private readonly VariableChangeEventArgs<T> _eventArgs = new();
 		private readonly object _lock = new();
+		private readonly IEqualityComparer<T> _comparer;
 
 		public string VariableName
 		{
@@ -35,7 +36,7 @@ namespace VariableUtils
 			{
 				lock (_lock)
 				{
-					if (!EqualityComparer<T>.Default.Equals(_value, value))
+					if (!_comparer.Equals(_value, value))
 					{
 						_eventArgs.PreviousValue = _value;
 						_value = value;
@@ -48,9 +49,10 @@ namespace VariableUtils
 
 		private T _value;
 
-		protected Variable(T initialValue = default(T))
+		protected Variable(T initialValue = default(T), IEqualityComparer<T> comparer = null)
 		{
 			_value = initialValue;
+			_comparer = comparer ?? EqualityComparer<T>.Default;
 		}
 
 		public Variable<T> Clone()
