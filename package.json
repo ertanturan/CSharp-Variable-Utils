@@ -9,6 +9,9 @@
     "email": "ertanturan@outlook.com",
     "url": "https://github.com/ertanturan"
   },
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.1"
+  },
   "keywords": [
     "convenience",
     "utils",
