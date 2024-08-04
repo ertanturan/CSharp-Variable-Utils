@@ -51,6 +51,16 @@ namespace VariableUtils
 		{
 			Value = default(T);
 		}
+
+		public string Serialize()
+		{
+			return JsonUtility.ToJson(this);
+		}
+
+		public Variable<T> Deserialize(string jsonString)
+		{
+			return JsonUtility.FromJson<Variable<T>>(jsonString);
+		}
 	}
 
 	public class FloatVariable : Variable<float>
