@@ -37,6 +37,7 @@ namespace VariableUtils
 				{
 					if (!EqualityComparer<T>.Default.Equals(_value, value))
 					{
+						_eventArgs.PreviousValue = _value;
 						_value = value;
 						_eventArgs.Value = _value;
 						OnValueChanged?.Invoke(this, _eventArgs);

@@ -10,6 +10,7 @@ namespace VariableUtils
 {
 	public class VariableChangeEventArgs<T> : EventArgs
 	{
+		public T PreviousValue { get; set; }
 		public T Value { get; set; }
 	}
 }
