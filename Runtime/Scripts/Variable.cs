@@ -14,6 +14,7 @@ namespace VariableUtils
 	{
 		public event EventHandler<VariableChangeEventArgs<T>> OnValueChanged;
 		private readonly VariableChangeEventArgs<T> _eventArgs = new();
+		private readonly object _lock = new();
 
 		public string VariableName
 		{
@@ -23,14 +24,23 @@ namespace VariableUtils
 
 		public T Value
 		{
-			get => _value;
+			get
+			{
+				lock (_lock)
+				{
+					return _value;
+				}
+			}
 			set
 			{
-				if (!EqualityComparer<T>.Default.Equals(_value, value))
+				lock (_lock)
 				{
-					_value = value;
-					_eventArgs.Value = _value;
-					OnValueChanged?.Invoke(this, _eventArgs);
+					if (!EqualityComparer<T>.Default.Equals(_value, value))
+					{
+						_value = value;
+						_eventArgs.Value = _value;
+						OnValueChanged?.Invoke(this, _eventArgs);
+					}
 				}
 			}
 		}
