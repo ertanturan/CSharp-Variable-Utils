@@ -8,6 +8,7 @@
 - **Cloning**: Create copies of variables with the `Clone` method.
 - **Resetting**: Reset variables to their default values.
 - **Serialization**: Serialize and deserialize variables to and from JSON.
+-  **Thread-Safety**: Ensure safe concurrent access to the variable with built-in locking mechanisms.
 
 ## Usage
 
