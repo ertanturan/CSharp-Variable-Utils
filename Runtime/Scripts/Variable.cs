@@ -52,7 +52,14 @@ namespace VariableUtils
 
 		private T _value;
 
-		public Variable(T initialValue)
+		public Variable()
+		{
+			_value = default(T);
+			_jsonFormatting = Formatting.None;
+			_comparer = EqualityComparer<T>.Default;
+		}
+
+		public Variable(T initialValue = default(T))
 		{
 			_value = initialValue;
 		}
@@ -62,20 +69,31 @@ namespace VariableUtils
 			_jsonFormatting = jsonFormatting;
 		}
 
+		public Variable(T initialValue = default(T), IEqualityComparer<T> comparer = null) : this(initialValue)
+		{
+			_comparer = comparer ?? EqualityComparer<T>.Default;
+		}
+
 		public Variable(T initialValue = default(T), Formatting jsonFormatting = Formatting.None,
 		                IEqualityComparer<T> comparer = null) : this(initialValue, jsonFormatting)
 		{
 			_comparer = comparer ?? EqualityComparer<T>.Default;
 		}
 
-		public virtual Variable<T> Clone()
+		public Variable<T> Clone()
 		{
-			return new Variable<T>(Value);
+			lock (_lock)
+			{
+				return new Variable<T>(Value, _comparer);
+			}
 		}
 
-		public virtual void Reset()
+		public void Reset()
 		{
-			Value = default(T);
+			lock (_lock)
+			{
+				Value = default(T);
+			}
 		}
 
 		/// <summary>
@@ -84,7 +102,10 @@ namespace VariableUtils
 		/// <returns>Json</returns>
 		public virtual string Serialize()
 		{
-			return JsonConvert.SerializeObject(this, _jsonFormatting);
+			lock (_lock)
+			{
+				return JsonConvert.SerializeObject(this, Formatting.None);
+			}
 		}
 
 		/// <summary>
