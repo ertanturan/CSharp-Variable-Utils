@@ -34,7 +34,12 @@ namespace VariableUtils
 			}
 		}
 
-		private T _value;
+		private readonly T _value;
+
+		protected Variable(T initialValue = default(T))
+		{
+			_value = initialValue;
+		}
 	}
 
 	public class FloatVariable : Variable<float>
