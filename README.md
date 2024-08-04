@@ -8,6 +8,7 @@
 - **Cloning**: Create copies of variables with the `Clone` method.
 - **Resetting**: Reset variables to their default values.
 - **Serialization**: Serialize and deserialize variables to and from JSON.
+-  **Thread-Safety**: Ensure safe concurrent access to the variable with built-in locking mechanisms.
 
 ## Usage
 
@@ -31,3 +32,15 @@ class Program
         intVariable.Value = 20;
     }
 }
+```
+### Serialization
+```csharp
+var json = intVariable.Serialize();
+var deserializedVariable = new IntVariable().Deserialize(json);
+```
+## Available Variable Types
+Primitive Types: IntVariable, FloatVariable, StringVariable, etc.
+Complex Types: Vector2Variable, ColorVariable, etc.
+Collection Types: ListVariable<T>, DictionaryVariable<TKey, TValue>, etc.
+# Dependencies
+Newtonsoft.Json: For JSON operations.
