@@ -84,4 +84,91 @@ namespace VariableUtils
 	public class Matrix4X4Variable : Variable<Matrix4x4>
 	{
 	}
+
+
+	public class DecimalVariable : Variable<decimal>
+	{
+	}
+
+	public class DateTimeVariable : Variable<DateTime>
+	{
+	}
+
+	public class TimeSpanVariable : Variable<TimeSpan>
+	{
+	}
+
+	public class GuidVariable : Variable<Guid>
+	{
+	}
+
+	public class UriVariable : Variable<Uri>
+	{
+	}
+
+	public class TupleVariable<T1, T2> : Variable<Tuple<T1, T2>>
+	{
+	}
+
+	public class KeyValuePairVariable<TKey, TValue> : Variable<KeyValuePair<TKey, TValue>>
+	{
+	}
+
+	public class ListVariable<T> : Variable<List<T>>
+	{
+	}
+
+	public class DictionaryVariable<TKey, TValue> : Variable<Dictionary<TKey, TValue>>
+	{
+	}
+
+	public class HashSetVariable<T> : Variable<HashSet<T>>
+	{
+	}
+
+	using System;
+
+	public class ByteVariable : Variable<byte>
+	{
+	}
+
+	public class LongVariable : Variable<long>
+	{
+	}
+
+	public class SByteVariable : Variable<sbyte>
+	{
+	}
+
+	public class UShortVariable : Variable<ushort>
+	{
+	}
+
+	public class UIntVariable : Variable<uint>
+	{
+	}
+
+	public class ULongVariable : Variable<ulong>
+	{
+	}
+
+	public class ShortVariable : Variable<short>
+	{
+	}
+
+	public class CharVariable : Variable<char>
+	{
+	}
+
+	public class ObjectVariable : Variable<object>
+	{
+	}
+
+	public class UIntPtrVariable : Variable<UIntPtr>
+	{
+	}
+
+	public class IntPtrVariable : Variable<IntPtr>
+	{
+	}
 }
