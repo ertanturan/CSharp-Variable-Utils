@@ -104,7 +104,7 @@ namespace VariableUtils
 		{
 			lock (_lock)
 			{
-				return JsonConvert.SerializeObject(this, Formatting.None);
+				return JsonConvert.SerializeObject(this, _jsonFormatting);
 			}
 		}
 
