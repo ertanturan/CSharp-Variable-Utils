@@ -11,7 +11,9 @@
 -  **Thread-Safety**: Ensure safe concurrent access to the variable with built-in locking mechanisms.
 
 ## Usage
-
+### Installation with UPM
+- In Unity engine=> Head over to Window>Package Manager
+- Press to + icon on top left from the opened window and press "Add Package from Git URL" and paste this repos https link
 ### Example
 
 ```csharp
