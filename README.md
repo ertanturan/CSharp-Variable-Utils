@@ -10,10 +10,33 @@
 - **Serialization**: Serialize and deserialize variables to and from JSON.
 -  **Thread-Safety**: Ensure safe concurrent access to the variable with built-in locking mechanisms.
 
+## Installation with UPM
+1. **Open Your Unity Project**: Launch your Unity project in the Unity Editor.
+
+2. **Open the Package Manager**:
+   - Go to `Window` > `Package Manager`.
+
+3. **Add the Package**:
+   - Click the `+` button in the top-left corner of the Package Manager window.
+   - Select `Add package from git URL...`.
+
+4. **Enter the Repository URL**:
+   - In the prompt that appears, enter the Git URL of the `VariableUtils` package. For example:
+     ```
+     https://github.com/YourUsername/VariableUtils.git
+     ```
+   - Click `Add`.
+
+5. **Confirm the Installation**:
+   - Unity will now download and install the package. You should see `VariableUtils` listed in the Package Manager once the installation is complete.
+
+6. **Verify the Installation**:
+   - Check the `Packages` folder in your Unity project's `Assets` directory to ensure the `VariableUtils` package has been added successfully.
+
+
+
 ## Usage
-### Installation with UPM
-- In Unity engine=> Head over to Window>Package Manager
-- Press to + icon on top left from the opened window and press "Add Package from Git URL" and paste this repos https link
+
 ### Example
 
 ```csharp
